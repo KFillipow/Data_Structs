@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 
 struct Node{
     int data;
@@ -80,7 +81,7 @@ class BinaryTree{
 		}
         void DisplayTree(){
         	Node* tmp = root;
-        	PreOrder(tmp);
+        	BreadthDisplay(tmp);
         	//print current node
         	//call PreOrder on left node
         	//call PreOrder on right node
@@ -91,6 +92,21 @@ class BinaryTree{
 			PreOrder(node->left);
 			PreOrder(node->right);
 		}
+        void BreadthDisplay(Node* root){
+            if(root == NULL) return;
+            std::queue<Node*> nodeQ;
+            nodeQ.push(root);
+            while(nodeQ.empty() == false){
+                Node* tmp = nodeQ.front();
+                std::cout << tmp->data << std::endl;
+                nodeQ.pop();
+                if(tmp->left != NULL)
+                    nodeQ.push(tmp->left);
+                if(tmp->right != NULL)
+                    nodeQ.push(tmp->right);
+            }
+
+        }
 };
 
 int main(){
